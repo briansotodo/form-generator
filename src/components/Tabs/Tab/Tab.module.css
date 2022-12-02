@@ -1,0 +1,12 @@
+.tab {
+  background-color: #ccc;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  font-size: 1.25rem;
+}
+
+.activeTab {
+  background-color: #35b746;
+  color: white;
+  font-weight: bold;
+}
