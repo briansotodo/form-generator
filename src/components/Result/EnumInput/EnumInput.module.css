@@ -1,0 +1,16 @@
+.options {
+  display: flex;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+}
+
+.option:not(:last-of-type) {
+  margin-right: 1rem;
+}
+
+.optionLabel {
+  margin-left: 0.25rem;
+}

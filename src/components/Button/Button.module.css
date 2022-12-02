@@ -1,0 +1,37 @@
+.button {
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.4rem 2rem;
+  border-radius: 6px;
+}
+
+.primary {
+  background-color: #52ce62;
+  color: white;
+}
+
+.primary:hover {
+  background-color: #35b746;
+}
+
+.primary[disabled] {
+  color: #999;
+  background-color: #ccc;
+}
+
+.secondary {
+  background-color: white;
+  color: #35b746;
+  border: 2px solid;
+}
+
+.secondary:hover {
+  background-color: #35b746;
+  color: white;
+}
+
+.secondary[disabled] {
+  color: #ccc;
+  background-color: transparent;
+}

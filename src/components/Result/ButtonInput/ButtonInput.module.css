@@ -1,0 +1,25 @@
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+}
+
+.primary {
+  background-color: #666;
+  color: white;
+}
+
+.primary:hover {
+  background-color: #999;
+}
+
+.secondary {
+  color: #666;
+  text-decoration: underline;
+}
+
+.secondary:hover {
+  color: #999;
+}

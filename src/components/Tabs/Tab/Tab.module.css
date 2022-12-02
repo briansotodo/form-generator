@@ -1,12 +1,22 @@
 .tab {
-  background-color: #ccc;
+  background-color: #eee;
   padding: 0.5rem 1.5rem;
   border: none;
-  font-size: 1.25rem;
+  font-size: 1rem;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.tab:hover {
+  background-color: rgb(228, 227, 227);
 }
 
 .activeTab {
-  background-color: #35b746;
+  background-color: #007aff;
   color: white;
   font-weight: bold;
+}
+
+.activeTab:hover {
+  background-color: #006ce0;
 }

@@ -1,0 +1,11 @@
+.inputElement {
+  grid-column: 2;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 4px;
+}
+
+.inputLabel {
+  grid-column: 1;
+  font-size: 1rem;
+}
