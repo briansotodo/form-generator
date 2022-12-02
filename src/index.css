@@ -22,3 +22,8 @@ code {
   display: flex;
   justify-content: center;
 }
+
+button:not(:disabled) {
+  transition: background-color 100ms linear;
+  cursor: pointer;
+}

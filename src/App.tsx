@@ -5,43 +5,23 @@ import Result from "./components/Result/Result";
 
 import styles from "./App.module.css";
 import Tabs from "./components/Tabs/Tabs";
+import Button from "./components/Button/Button";
+import validateConfig from "./utils/validateConfig";
+import EXAMPLE_FORM from "./utils/example-form";
+import { FormConfig } from "./index.types";
 
-export enum FormItemType {
-  Number = "number",
-  String = "string",
-  MultiLine = "multi-line",
-  Boolean = "boolean",
-  Date = "date",
-  Enum = "enum",
-}
+export type FormItemOption = { label: string };
 
-interface FormItem {
-  label: string;
-  type: FormItemType;
-}
-
-interface FormAction {
-  text: string;
-}
-
-export interface FormConfig {
-  title?: string;
-  items: Array<FormItem>;
-  actions: Array<FormAction>;
-}
-
-enum SupportedTab {
+enum TabType {
   Config = "config",
   Result = "result",
 }
 
 function App() {
-  const [activeTab, setActiveTab] = useState(SupportedTab.Config);
-
-  const [text, setText] = useState("");
+  const [activeTab, setActiveTab] = useState(TabType.Result);
+  const [text, setText] = useState(JSON.stringify(EXAMPLE_FORM));
+  const [formConfig, setFormConfig] = useState<FormConfig>(EXAMPLE_FORM);
   const [errorMessage, setErrorMessage] = useState("");
-
-  const [formConfig, setFormConfig] = useState<FormConfig>();
 
   const handleTextChange = (text: string): void => {
     setText(text);
@@ -50,10 +30,9 @@ function App() {
   const handleApplyClick = (): void => {
     let formConfig;
 
-    // TODO: Sanitaze 'text' #nevertrustuserinput
-
     try {
-      formConfig = JSON.parse(text);
+      const json = JSON.parse(text);
+      formConfig = validateConfig(json);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMessage(err.message);
@@ -68,46 +47,45 @@ function App() {
     setErrorMessage("");
 
     setFormConfig(formConfig);
+    setActiveTab(TabType.Result);
   };
 
-  ///- Tabs
-
-  const handleTabChange = (tab: SupportedTab) => {
+  const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
   };
 
   return (
     <div className={styles.root}>
-      <Tabs<SupportedTab>
+      <Tabs<TabType>
         activeTab={activeTab}
         onActiveTabChange={handleTabChange}
         tabs={[
-          { id: SupportedTab.Config, title: "Config" },
-          { id: SupportedTab.Result, title: "Result" },
+          { id: TabType.Config, title: "Config" },
+          { id: TabType.Result, title: "Result" },
         ]}
       />
 
-      {activeTab === SupportedTab.Config && (
+      {activeTab === TabType.Config && (
         <>
           <Config
-            className={styles.tab}
+            className={styles.tabContent}
             value={text}
             onChange={handleTextChange}
             errorMessage={errorMessage}
           />
 
-          <button
+          <Button
             className={styles.applyButton}
             onClick={handleApplyClick}
             disabled={text.length < 1}
           >
             Apply
-          </button>
+          </Button>
         </>
       )}
 
-      {activeTab === SupportedTab.Result && (
-        <Result className={styles.tab} formConfig={formConfig} />
+      {activeTab === TabType.Result && (
+        <Result className={styles.tabContent} formConfig={formConfig} />
       )}
     </div>
   );
