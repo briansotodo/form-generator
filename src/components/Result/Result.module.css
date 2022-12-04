@@ -6,3 +6,12 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
+.noResultTitle {
+  margin: 0;
+  margin-bottom: 0.25rem;
+}
+
+.noResultMessage {
+  margin: 0;
+}

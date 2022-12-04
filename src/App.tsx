@@ -92,7 +92,7 @@ function App() {
       {activeTab === SupportedTab.Config && (
         <>
           <Config
-            className={styles.tab}
+            className={styles.tabContent}
             value={text}
             onChange={handleTextChange}
             errorMessage={errorMessage}
@@ -109,7 +109,7 @@ function App() {
       )}
 
       {activeTab === SupportedTab.Result && (
-        <Result className={styles.tab} formConfig={formConfig} />
+        <Result className={styles.tabContent} formConfig={formConfig} />
       )}
     </div>
   );

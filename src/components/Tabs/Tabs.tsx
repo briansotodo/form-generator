@@ -1,6 +1,5 @@
 import React, { Key } from "react";
 
-import styles from "./Tabs.module.css";
 import Tab from "./Tab/Tab";
 
 interface TabsProps<T> {
@@ -17,7 +16,7 @@ function Tabs<T extends Key>(props: TabsProps<T>) {
   };
 
   return (
-    <section className={styles.root}>
+    <section>
       {tabs.map((tab) => (
         <Tab<T>
           key={tab.id}

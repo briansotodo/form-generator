@@ -30,7 +30,15 @@ function Result({ formConfig, className }: ResultProps) {
 
   const renderForm = () => {
     if (formConfig === undefined) {
-      return <h2>Nothing to see here</h2>;
+      return (
+        <div>
+          <h3 className={styles.noResultTitle}>No form created yet</h3>
+          <p className={styles.noResultMessage}>
+            Please enter some configuration in the "Config" tab, and click apply
+            button aftewards.
+          </p>
+        </div>
+      );
     }
 
     return (

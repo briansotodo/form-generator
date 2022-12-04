@@ -1,7 +1,6 @@
 .root {
   display: flex;
   flex-direction: column;
-  background-color: #eee;
 }
 
 .error {
@@ -17,7 +16,6 @@
   resize: none;
   border: none;
   outline: none;
-  background-color: #eee;
 
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
