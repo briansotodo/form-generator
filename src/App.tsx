@@ -38,7 +38,9 @@ enum SupportedTab {
 function App() {
   const [activeTab, setActiveTab] = useState(SupportedTab.Config);
 
-  const [text, setText] = useState("");
+  const [text, setText] = useState(
+    '{"title":"My Form","items":[{"label":"Name","type":"string"},{"label":"Age","type":"number"},{"label":"About you","type":"multi-line"},{"label":"Single","type":"boolean"},{"label":"Birthday","type":"date"},{"label":"Sexual orientation","type":"enum"}],"actions":[{"text":"Cancel"},{"text":"Submit"}]}'
+  );
   const [errorMessage, setErrorMessage] = useState("");
 
   const [formConfig, setFormConfig] = useState<FormConfig>();

@@ -4,6 +4,14 @@ import classNames from "classnames";
 import { FormConfig, FormItemType } from "../../App";
 
 import styles from "./Result.module.css";
+import TextInput from "../Inputs/TextInput";
+
+import NumberInput from "../Inputs/NumberInput";
+import MultiLineInput from "../Inputs/MultiLineInput";
+import BooleanInput from "../Inputs/BooleanInput";
+import EnumInput from "../Inputs/DateInput";
+import { InputType } from "../Inputs/Inputs.types";
+import DateInput from "../Inputs/DateInput";
 
 interface ResultProps {
   formConfig: FormConfig | undefined;
@@ -11,38 +19,15 @@ interface ResultProps {
 }
 
 function Result({ formConfig, className }: ResultProps) {
-  const COMPONENT_REGISTRY = {
-    [FormItemType.Number]: (
-      <label>
-        <input type="number" value="42" />
-      </label>
-    ),
-    [FormItemType.String]: (
-      <label>
-        <input type="text" value="test" />
-      </label>
-    ),
-    [FormItemType.MultiLine]: (
-      <label>
-        <textarea></textarea>
-      </label>
-    ),
-    [FormItemType.Boolean]: (
-      <label>
-        <input type="checkbox" />
-      </label>
-    ),
-    [FormItemType.Date]: (
-      <label>
-        <input type="date" />
-      </label>
-    ),
-    [FormItemType.Enum]: (
-      <label>
-        <input type="radio" />
-      </label>
-    ),
+  const COMPONENT_REGISTRY: Record<FormItemType, InputType> = {
+    [FormItemType.Number]: TextInput,
+    [FormItemType.String]: NumberInput,
+    [FormItemType.MultiLine]: MultiLineInput,
+    [FormItemType.Boolean]: BooleanInput,
+    [FormItemType.Date]: DateInput,
+    [FormItemType.Enum]: EnumInput,
   };
+
   const renderForm = () => {
     if (formConfig === undefined) {
       return <h2>Nothing to see here</h2>;
@@ -51,9 +36,15 @@ function Result({ formConfig, className }: ResultProps) {
     return (
       <>
         {[
-          formConfig.title ? <h2>{formConfig.title}</h2> : null,
-          formConfig.items.map((item) => COMPONENT_REGISTRY[item.type]),
-          <div>
+          formConfig.title ? (
+            <h2 key="form-title">{formConfig.title}</h2>
+          ) : null,
+          formConfig.items.map((item, i) => {
+            const InputX = COMPONENT_REGISTRY[item.type];
+            const key = `${item.type}:${i}`;
+            return <InputX key={key} label={item.label} />;
+          }),
+          <div key="form-actions">
             {formConfig.actions.map((action) => (
               <button key={action.text}>{action.text}</button>
             ))}
