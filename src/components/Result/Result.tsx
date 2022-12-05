@@ -3,16 +3,15 @@ import classNames from "classnames";
 
 import { FormConfig, FormItemType } from "../../App";
 
-import Button from "../Button/Button";
-
 import NumberInput from "./NumberInput/NumberInput";
-import TextInput from "./NumberInput/NumberInput";
+import TextInput from "./TextInput/TextInput";
 import MultiLineInput from "./MultiLineInput/MultiLineInput";
 import BooleanInput from "./BooleanInput/BooleanInput";
 import DateInput from "./DateInput/DateInput";
 import EnumInput from "./EnumInput/EnumInput";
 import { InputType } from "./Inputs.types";
 import styles from "./Result.module.css";
+import ButtonInput from "./ButtonInput/ButtonInput";
 
 interface ResultProps {
   formConfig: FormConfig | undefined;
@@ -21,8 +20,8 @@ interface ResultProps {
 
 function Result({ formConfig, className }: ResultProps) {
   const COMPONENT_REGISTRY: Record<FormItemType, InputType> = {
-    [FormItemType.Number]: TextInput,
-    [FormItemType.String]: NumberInput,
+    [FormItemType.Number]: NumberInput,
+    [FormItemType.String]: TextInput,
     [FormItemType.MultiLine]: MultiLineInput,
     [FormItemType.Boolean]: BooleanInput,
     [FormItemType.Date]: DateInput,
@@ -55,14 +54,23 @@ function Result({ formConfig, className }: ResultProps) {
           ) : null,
           formConfig.items?.map((item, i) => {
             const InputEl = COMPONENT_REGISTRY[item.type];
-            const key = `${item.type}:${i}`;
-            return <InputEl key={key} label={item.label} />;
+            return (
+              <InputEl
+                key={item.type + i}
+                label={item.label}
+                options={item.options}
+              />
+            );
           }),
           <div key="form-actions" className={styles.formActions}>
-            {formConfig.actions?.map((action) => (
-              <Button className={styles.formActionButton} key={action.text}>
+            {formConfig.actions?.map((action, i) => (
+              <ButtonInput
+                key={action.text + i}
+                variant={action.type}
+                className={styles.formActionButton}
+              >
                 {action.text}
-              </Button>
+              </ButtonInput>
             ))}
           </div>,
         ]}

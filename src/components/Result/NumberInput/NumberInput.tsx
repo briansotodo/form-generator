@@ -3,13 +3,13 @@ import React from "react";
 import { InputProps } from "../Inputs.types";
 import styles from "../Inputs.module.css";
 
-function TextInput({ label }: InputProps) {
+function NumberInput({ label }: InputProps) {
   return (
     <>
       <label className={styles.label}>{label}</label>
-      <input className={styles.input} type="text" />
+      <input className={styles.input} type="number" />
     </>
   );
 }
 
-export default TextInput;
+export default NumberInput;

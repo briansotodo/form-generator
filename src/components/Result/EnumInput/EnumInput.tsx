@@ -1,15 +1,25 @@
 import React from "react";
+import classNames from "classnames";
 
 import { InputProps } from "../Inputs.types";
-import styles from "../Inputs.module.css";
+import inputsStyles from "../Inputs.module.css";
 
-function BooleanInput({ label }: InputProps) {
+import styles from "./EnumInput.module.css";
+
+function EnumInput({ label, options }: InputProps) {
   return (
     <>
-      <label className={styles.label}>{label}</label>
-      <input className={styles.input} type="radio" />
+      <div className={inputsStyles.label}>{label}</div>
+      <div className={classNames(styles.options, inputsStyles.input)}>
+        {options?.map((option, i) => (
+          <label key={option.label + i} className={styles.option}>
+            <input type="radio" name={label} />
+            <span className={styles.optionLabel}>{option.label}</span>
+          </label>
+        ))}
+      </div>
     </>
   );
 }
 
-export default BooleanInput;
+export default EnumInput;

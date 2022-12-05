@@ -6,6 +6,8 @@ import Result from "./components/Result/Result";
 import styles from "./App.module.css";
 import Tabs from "./components/Tabs/Tabs";
 import Button from "./components/Button/Button";
+import validateConfig from "./utils/validateConfig";
+import EXAMPLE_FORM from "./utils/example-form";
 
 export enum FormItemType {
   Number = "number",
@@ -16,13 +18,19 @@ export enum FormItemType {
   Enum = "enum",
 }
 
-interface FormItem {
+export type FormItemOption = { label: string };
+
+export interface FormItem {
   label: string;
   type: FormItemType;
+  options?: Array<{ label: string }>;
 }
 
-interface FormAction {
+export type FormActionType = "primary" | "secondary";
+
+export interface FormAction {
   text: string;
+  type?: FormActionType;
 }
 
 export interface FormConfig {
@@ -37,14 +45,10 @@ enum SupportedTab {
 }
 
 function App() {
-  const [activeTab, setActiveTab] = useState(SupportedTab.Config);
-
-  const [text, setText] = useState(
-    '{"title":"My Form","items":[{"label":"Name","type":"string"},{"label":"Age","type":"number"},{"label":"About you","type":"multi-line"},{"label":"Single","type":"boolean"},{"label":"Birthday","type":"date"},{"label":"Sexual orientation","type":"enum"}],"actions":[{"text":"Cancel"},{"text":"Submit"}]}'
-  );
+  const [activeTab, setActiveTab] = useState(SupportedTab.Result);
+  const [text, setText] = useState(JSON.stringify(EXAMPLE_FORM));
+  const [formConfig, setFormConfig] = useState<FormConfig>(EXAMPLE_FORM);
   const [errorMessage, setErrorMessage] = useState("");
-
-  const [formConfig, setFormConfig] = useState<FormConfig>();
 
   const handleTextChange = (text: string): void => {
     setText(text);
@@ -53,10 +57,9 @@ function App() {
   const handleApplyClick = (): void => {
     let formConfig;
 
-    // TODO: Sanitaze 'text' #nevertrustuserinput
-
     try {
-      formConfig = JSON.parse(text);
+      const json = JSON.parse(text);
+      formConfig = validateConfig(json);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMessage(err.message);
