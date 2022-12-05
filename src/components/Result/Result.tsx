@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { FormConfig, FormItemType } from "../../App";
+import { FormConfig, FormItemType } from "../../index.types";
 
 import NumberInput from "./NumberInput/NumberInput";
 import TextInput from "./TextInput/TextInput";

@@ -1,4 +1,4 @@
-import { FormConfig, FormItemType } from "../App";
+import { FormConfig, FormItemType } from "../index.types";
 
 /**
  * We need to make sure that the user input makes sense. Otherwise

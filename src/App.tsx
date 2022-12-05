@@ -8,44 +8,17 @@ import Tabs from "./components/Tabs/Tabs";
 import Button from "./components/Button/Button";
 import validateConfig from "./utils/validateConfig";
 import EXAMPLE_FORM from "./utils/example-form";
-
-export enum FormItemType {
-  Number = "number",
-  String = "string",
-  MultiLine = "multi-line",
-  Boolean = "boolean",
-  Date = "date",
-  Enum = "enum",
-}
+import { FormConfig } from "./index.types";
 
 export type FormItemOption = { label: string };
 
-export interface FormItem {
-  label: string;
-  type: FormItemType;
-  options?: Array<{ label: string }>;
-}
-
-export type FormActionType = "primary" | "secondary";
-
-export interface FormAction {
-  text: string;
-  type?: FormActionType;
-}
-
-export interface FormConfig {
-  title?: string;
-  items?: Array<FormItem>;
-  actions?: Array<FormAction>;
-}
-
-enum SupportedTab {
+enum TabType {
   Config = "config",
   Result = "result",
 }
 
 function App() {
-  const [activeTab, setActiveTab] = useState(SupportedTab.Result);
+  const [activeTab, setActiveTab] = useState(TabType.Result);
   const [text, setText] = useState(JSON.stringify(EXAMPLE_FORM));
   const [formConfig, setFormConfig] = useState<FormConfig>(EXAMPLE_FORM);
   const [errorMessage, setErrorMessage] = useState("");
@@ -74,27 +47,25 @@ function App() {
     setErrorMessage("");
 
     setFormConfig(formConfig);
-    setActiveTab(SupportedTab.Result);
+    setActiveTab(TabType.Result);
   };
 
-  ///- Tabs
-
-  const handleTabChange = (tab: SupportedTab) => {
+  const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
   };
 
   return (
     <div className={styles.root}>
-      <Tabs<SupportedTab>
+      <Tabs<TabType>
         activeTab={activeTab}
         onActiveTabChange={handleTabChange}
         tabs={[
-          { id: SupportedTab.Config, title: "Config" },
-          { id: SupportedTab.Result, title: "Result" },
+          { id: TabType.Config, title: "Config" },
+          { id: TabType.Result, title: "Result" },
         ]}
       />
 
-      {activeTab === SupportedTab.Config && (
+      {activeTab === TabType.Config && (
         <>
           <Config
             className={styles.tabContent}
@@ -113,7 +84,7 @@ function App() {
         </>
       )}
 
-      {activeTab === SupportedTab.Result && (
+      {activeTab === TabType.Result && (
         <Result className={styles.tabContent} formConfig={formConfig} />
       )}
     </div>
