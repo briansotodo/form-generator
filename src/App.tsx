@@ -5,6 +5,7 @@ import Result from "./components/Result/Result";
 
 import styles from "./App.module.css";
 import Tabs from "./components/Tabs/Tabs";
+import Button from "./components/Button/Button";
 
 export enum FormItemType {
   Number = "number",
@@ -26,8 +27,8 @@ interface FormAction {
 
 export interface FormConfig {
   title?: string;
-  items: Array<FormItem>;
-  actions: Array<FormAction>;
+  items?: Array<FormItem>;
+  actions?: Array<FormAction>;
 }
 
 enum SupportedTab {
@@ -70,6 +71,7 @@ function App() {
     setErrorMessage("");
 
     setFormConfig(formConfig);
+    setActiveTab(SupportedTab.Result);
   };
 
   ///- Tabs
@@ -98,13 +100,13 @@ function App() {
             errorMessage={errorMessage}
           />
 
-          <button
+          <Button
             className={styles.applyButton}
             onClick={handleApplyClick}
             disabled={text.length < 1}
           >
             Apply
-          </button>
+          </Button>
         </>
       )}
 

@@ -12,24 +12,12 @@
   max-height: 600px;
   border: 1px solid #ccc;
   padding: 1rem;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .applyButton {
   align-self: flex-end;
-  border: none;
-  background-color: #35b746;
-  font-weight: bold;
-  color: white;
-  font-size: 1.2rem;
-  padding: 0.5rem 3rem;
   margin-top: 1rem;
-}
-
-.applyButton:hover {
-  background-color: #52ce62;
-}
-
-.applyButton[disabled] {
-  color: #999;
-  background-color: #ccc;
 }
