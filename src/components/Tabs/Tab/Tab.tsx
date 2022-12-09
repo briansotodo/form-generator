@@ -19,6 +19,7 @@ function Tab<T>({ active, id, onClick, children }: TabProps<T>) {
     <button
       onClick={handleClick}
       className={classNames(styles.tab, active && styles.activeTab)}
+      disabled={active}
     >
       {children}
     </button>

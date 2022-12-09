@@ -2,7 +2,7 @@ import { FormConfig, FormItemType } from "../index.types";
 
 /**
  * We need to make sure that the user input makes sense. Otherwise
- * she may end up with a broken form without knowing why.
+ * she may end up with a broken form without knowing why, or app may crash.
  * @param formConfig config entered by the user and parsed as (valid) json
  * @returns valid formConfig
  */

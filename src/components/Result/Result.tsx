@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { FormConfig, FormItemType } from "../../index.types";
+import { FormConfig, FormItemType, InputProps } from "../../index.types";
 
 import NumberInput from "./NumberInput/NumberInput";
 import TextInput from "./TextInput/TextInput";
@@ -9,9 +9,10 @@ import MultiLineInput from "./MultiLineInput/MultiLineInput";
 import BooleanInput from "./BooleanInput/BooleanInput";
 import DateInput from "./DateInput/DateInput";
 import EnumInput from "./EnumInput/EnumInput";
-import { InputType } from "./Inputs.types";
 import styles from "./Result.module.css";
 import ButtonInput from "./ButtonInput/ButtonInput";
+
+type InputElement = (props: InputProps) => JSX.Element;
 
 interface ResultProps {
   formConfig: FormConfig | undefined;
@@ -19,7 +20,7 @@ interface ResultProps {
 }
 
 function Result({ formConfig, className }: ResultProps) {
-  const COMPONENT_REGISTRY: Record<FormItemType, InputType> = {
+  const COMPONENT_REGISTRY: Record<FormItemType, InputElement> = {
     [FormItemType.Number]: NumberInput,
     [FormItemType.String]: TextInput,
     [FormItemType.MultiLine]: MultiLineInput,
@@ -54,9 +55,11 @@ function Result({ formConfig, className }: ResultProps) {
           ) : null,
           formConfig.items?.map((item, i) => {
             const InputEl = COMPONENT_REGISTRY[item.type];
+            const id = `el-${i}:${item.type}-${item.label}`;
             return (
               <InputEl
-                key={item.type + i}
+                key={id}
+                id={id}
                 label={item.label}
                 options={item.options}
               />
