@@ -1,8 +1,38 @@
 .root {
 }
 
-.form {
+.formTitle {
+  grid-column: 1/3;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+}
+
+.formTitle h2 {
+  margin: 0;
+}
+
+.formInputElementsContainer {
+  max-width: 500px;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  grid-template-rows: auto;
+  row-gap: 1rem;
+  justify-items: start;
+}
+
+.formActions {
+  grid-column: 1/3;
+  justify-self: end;
+}
+
+.formActionButton:not(:last-of-type) {
+  margin-right: 0.5rem;
+}
+
+.noResultTitle {
+  margin: 0;
+}
+
+.noResultMessage {
+  margin: 0;
 }
