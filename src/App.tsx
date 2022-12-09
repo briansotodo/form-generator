@@ -7,10 +7,10 @@ import styles from "./App.module.css";
 import Tabs from "./components/Tabs/Tabs";
 import Button from "./components/Button/Button";
 import validateConfig from "./utils/validateConfig";
-import EXAMPLE_FORM from "./utils/example-form";
 import { FormConfig } from "./index.types";
+import EXAMPLE_FORM from "./utils/example-form";
 
-export type FormItemOption = { label: string };
+const EXAMPLE_FORM_JSON = JSON.parse(EXAMPLE_FORM);
 
 enum TabType {
   Config = "config",
@@ -19,8 +19,8 @@ enum TabType {
 
 function App() {
   const [activeTab, setActiveTab] = useState(TabType.Result);
-  const [text, setText] = useState(JSON.stringify(EXAMPLE_FORM));
-  const [formConfig, setFormConfig] = useState<FormConfig>(EXAMPLE_FORM);
+  const [text, setText] = useState(EXAMPLE_FORM);
+  const [formConfig, setFormConfig] = useState<FormConfig>(EXAMPLE_FORM_JSON);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleTextChange = (text: string): void => {

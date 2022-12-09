@@ -1,6 +1,7 @@
 /**
- * To test validateConfig as it will be use by a user, we need to
- * avoid TypeScript type checks in the unit tests.
+ * Allow testing `validateConfig` easier for developers by allowing them
+ * to use JavaScript objects, while keeping the tests themselfs very close
+ * to a how users would trigger `validateConfig`: JS object from unknown string.
  * @param jsObject a js object representing user input
  * @returns an object without TS type information
  */

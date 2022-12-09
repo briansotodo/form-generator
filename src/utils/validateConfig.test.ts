@@ -1,12 +1,14 @@
 import { FormItemType } from "../index.types";
+import EXAMPLE_FORM from "./example-form";
 
-import EXAMPLE_FROM from "./example-form";
 import simulateUserInput from "./simulateUserInput";
 import validateConfig from "./validateConfig";
 
+const EXAMPLE_FROM_JSON = JSON.parse(EXAMPLE_FORM);
+
 test("It doesn't throw on valid input and returns the argument", () => {
-  expect(() => validateConfig(EXAMPLE_FROM)).not.toThrow();
-  expect(validateConfig(EXAMPLE_FROM)).toBe(EXAMPLE_FROM);
+  expect(() => validateConfig(EXAMPLE_FROM_JSON)).not.toThrow();
+  expect(validateConfig(EXAMPLE_FROM_JSON)).toBe(EXAMPLE_FROM_JSON);
 });
 
 ///- Test 'title' property.
@@ -91,5 +93,3 @@ test("It throws if 'items' elements don't have a 'label'", () => {
   });
   expect(() => validateConfig(config)).toThrow();
 });
-
-// TODO: test cases missing.

@@ -1,17 +1,21 @@
 import React from "react";
 import classNames from "classnames";
 
-import { InputProps } from "../Inputs.types";
+import { InputProps } from "../../../index.types";
+
 import inputsStyles from "../Inputs.module.css";
 
 import styles from "./MultiLineInput.module.css";
 
-function MultiLineInput({ label }: InputProps) {
+function MultiLineInput({ id, label }: InputProps) {
   return (
     <>
-      <label className={inputsStyles.label}>{label}</label>
+      <label className={inputsStyles.label} htmlFor={id}>
+        {label}
+      </label>
       <textarea
         className={classNames(styles.textarea, inputsStyles.label)}
+        id={id}
       ></textarea>
     </>
   );
